@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #FAF9F7;
+  --bg-secondary: #F0EEEB;
+  --bg-tertiary: #E8E5E0;
+  --bg-dark: #1A1A1A;
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-tertiary: #8A8A84;
+  --accent: #7BA7BC;
+  --accent-hover: #5E8FA6;
+  --accent-light: #E8F1F5;
+  --accent-subtle: #F0F6F9;
+  --border: #E0DDD8;
+  --border-light: #ECEAE6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent-light);
+  color: var(--text-primary);
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply py-20 md:py-24 lg:py-[140px];
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
