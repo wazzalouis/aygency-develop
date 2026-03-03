@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans, Inter, Playfair_Display } from "next/font/google";
+import Nav from "@/components/layout/Nav";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -55,9 +57,9 @@ export default function RootLayout({
       className={`${instrumentSans.variable} ${inter.variable} ${playfairDisplay.variable}`}
     >
       <body className="font-body antialiased">
-        {/* <Nav /> */}
+        <Nav />
         <main>{children}</main>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
