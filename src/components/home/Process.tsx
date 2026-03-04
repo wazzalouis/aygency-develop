@@ -1,11 +1,32 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionContainer from "@/components/ui/SectionContainer";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { processSteps } from "@/lib/data";
 
 export default function Process() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!timelineRef.current || !lineRef.current) return;
+    const trigger = ScrollTrigger.create({
+      trigger: timelineRef.current,
+      start: "top 60%",
+      end: "bottom 60%",
+      scrub: true,
+      animation: gsap.to(lineRef.current, {
+        scaleY: 1,
+        ease: "none",
+      }),
+    });
+    return () => trigger.kill();
+  }, []);
+
   return (
     <section className="bg-primary section-padding">
       <SectionContainer>
@@ -15,8 +36,14 @@ export default function Process() {
           align="center"
         />
 
-        <div className="relative mt-16 max-w-2xl mx-auto">
-          {/* Centre line */}
+        <div ref={timelineRef} className="relative mt-16 max-w-2xl mx-auto">
+          {/* Centre line — animated */}
+          <div
+            ref={lineRef}
+            className="absolute left-[24px] md:left-1/2 md:-translate-x-1/2 w-px bg-accent/40 top-0 bottom-0 origin-top"
+            style={{ transform: "scaleY(0)" }}
+          />
+          {/* Static background line */}
           <div className="absolute left-[24px] md:left-1/2 md:-translate-x-1/2 w-px bg-border top-0 bottom-0" />
 
           {processSteps.map((step, i) => (
@@ -40,13 +67,24 @@ export default function Process() {
                   )}
                 </div>
 
-                {/* Circle */}
+                {/* Circle — spring animation */}
                 <div className="flex-shrink-0 md:flex md:justify-center">
-                  <div className="w-12 h-12 rounded-full bg-accent-light border-2 border-accent flex items-center justify-center relative z-10">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                      delay: 0.1,
+                    }}
+                    className="w-12 h-12 rounded-full bg-accent-light border-2 border-accent flex items-center justify-center relative z-10"
+                  >
                     <span className="font-heading font-semibold text-accent text-sm">
                       {step.number}
                     </span>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Mobile content (always visible on mobile) */}

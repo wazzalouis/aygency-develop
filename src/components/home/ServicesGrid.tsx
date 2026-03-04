@@ -65,7 +65,7 @@ export default function ServicesGrid() {
                   className="group block bg-primary border border-border rounded-2xl p-8 md:p-10 hover:shadow-card-hover hover:border-accent/30 hover:-translate-y-[2px] transition-all duration-300 cursor-pointer"
                 >
                   <div className="flex items-start justify-between">
-                    <div className="w-14 h-14 bg-accent-light rounded-xl flex items-center justify-center">
+                    <div className="icon-animate w-14 h-14 bg-accent-light rounded-xl flex items-center justify-center">
                       <Icon size={32} className="text-accent" />
                     </div>
                     <span className="font-heading text-xs text-text-tertiary tracking-widest">

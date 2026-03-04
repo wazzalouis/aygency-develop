@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { services, caseStudies } from "@/lib/data";
 import ServiceDetailClient from "./ServiceDetailClient";
+import PageTransition from "@/components/ui/PageTransition";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -34,5 +35,9 @@ export default async function ServiceDetailPage({
     ? caseStudies.find((cs) => cs.slug === service.relatedCaseStudy)
     : undefined;
 
-  return <ServiceDetailClient service={service} relatedStudy={relatedStudy} />;
+  return (
+    <PageTransition>
+      <ServiceDetailClient service={service} relatedStudy={relatedStudy} />
+    </PageTransition>
+  );
 }

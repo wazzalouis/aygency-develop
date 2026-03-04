@@ -1,7 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
 import SectionContainer from "@/components/ui/SectionContainer";
-import Reveal from "@/components/ui/Reveal";
 
 const painLines = [
   "Your team is drowning in repetitive tasks.",
@@ -10,28 +10,58 @@ const painLines = [
   "You\u2019ve been told AI can help \u2014 but every conversation ends with a proposal, not a product.",
 ];
 
+const lineVariants = {
+  hidden: { y: "100%" },
+  visible: {
+    y: "0%",
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
 export default function PainPoint() {
   return (
     <section className="bg-primary section-padding">
       <SectionContainer>
         <div className="max-w-3xl mx-auto text-center">
           {painLines.map((line, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <p className="font-body text-xl md:text-2xl text-text-secondary leading-relaxed mb-4">
+            <div key={i} className="overflow-hidden mb-4">
+              <motion.p
+                variants={lineVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.15 }}
+                className="font-body text-xl md:text-2xl text-text-secondary leading-relaxed"
+              >
                 {line}
-              </p>
-            </Reveal>
+              </motion.p>
+            </div>
           ))}
 
-          <Reveal delay={0.5}>
-            <p className="font-heading font-semibold text-3xl md:text-4xl text-text-primary mt-12">
+          <div className="overflow-hidden mt-12">
+            <motion.p
+              variants={lineVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: 0.6 }}
+              className="font-heading font-semibold text-3xl md:text-4xl text-text-primary"
+            >
               We&rsquo;re different.
-            </p>
-          </Reveal>
+            </motion.p>
+          </div>
 
-          <Reveal delay={0.6}>
-            <div className="w-16 h-1 bg-accent rounded-full mx-auto mt-4" />
-          </Reveal>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.6,
+              delay: 0.75,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="w-16 h-1 bg-accent rounded-full mx-auto mt-4 origin-left"
+          />
         </div>
       </SectionContainer>
     </section>

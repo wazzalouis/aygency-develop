@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { caseStudies } from "@/lib/data";
 import CaseStudyDetailClient from "./CaseStudyDetailClient";
+import PageTransition from "@/components/ui/PageTransition";
 
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
@@ -33,5 +34,9 @@ export default async function CaseStudyDetailPage({
   const study = caseStudies[studyIndex];
   const nextStudy = caseStudies[(studyIndex + 1) % caseStudies.length];
 
-  return <CaseStudyDetailClient study={study} nextStudy={nextStudy} />;
+  return (
+    <PageTransition>
+      <CaseStudyDetailClient study={study} nextStudy={nextStudy} />
+    </PageTransition>
+  );
 }

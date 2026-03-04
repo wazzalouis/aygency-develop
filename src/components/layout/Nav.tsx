@@ -155,7 +155,7 @@ export default function Nav() {
 
             {/* Mobile hamburger */}
             <button
-              className="lg:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-[6px]"
+              className="lg:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-[6px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2 rounded-lg"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >

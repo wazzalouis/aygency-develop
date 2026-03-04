@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import SectionContainer from "@/components/ui/SectionContainer";
@@ -8,6 +9,17 @@ import Reveal from "@/components/ui/Reveal";
 import { caseStudies } from "@/lib/data";
 
 export default function CaseStudies() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+    setProgress(el.scrollLeft / maxScroll);
+  }, []);
+
   return (
     <section id="case-studies" className="bg-secondary section-padding">
       <SectionContainer>
@@ -17,7 +29,11 @@ export default function CaseStudies() {
           align="left"
         />
 
-        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide mt-16 -mx-6 px-6 md:-mx-8 md:px-8">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide mt-16 -mx-6 px-6 md:-mx-8 md:px-8"
+        >
           {caseStudies.map((study, i) => (
             <Reveal key={study.slug} delay={i * 0.1} direction="right">
               <Link
@@ -59,12 +75,20 @@ export default function CaseStudies() {
                   <span>Read case study</span>
                   <ArrowRight
                     size={16}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
+                    className="transition-transform duration-200 group-hover:translate-x-1"
                   />
                 </div>
               </Link>
             </Reveal>
           ))}
+        </div>
+
+        {/* Scroll progress bar */}
+        <div className="w-full h-0.5 bg-border rounded-full mt-6">
+          <div
+            className="h-full bg-accent rounded-full transition-all duration-100"
+            style={{ width: `${Math.max(progress * 100, 2)}%` }}
+          />
         </div>
       </SectionContainer>
     </section>

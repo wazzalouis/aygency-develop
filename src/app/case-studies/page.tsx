@@ -5,11 +5,12 @@ import { ArrowRight } from "lucide-react";
 import SectionContainer from "@/components/ui/SectionContainer";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import PageTransition from "@/components/ui/PageTransition";
 import { caseStudies } from "@/lib/data";
 
 export default function CaseStudiesPage() {
   return (
-    <>
+    <PageTransition>
       {/* Hero */}
       <section className="bg-secondary pt-32 pb-20">
         <SectionContainer>
@@ -88,6 +89,6 @@ export default function CaseStudiesPage() {
           </div>
         </SectionContainer>
       </section>
-    </>
+    </PageTransition>
   );
 }

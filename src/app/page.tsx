@@ -6,10 +6,11 @@ import CaseStudies from "@/components/home/CaseStudies";
 import Process from "@/components/home/Process";
 import Metrics from "@/components/home/Metrics";
 import FinalCTA from "@/components/home/FinalCTA";
+import PageTransition from "@/components/ui/PageTransition";
 
 export default function HomePage() {
   return (
-    <>
+    <PageTransition>
       <Hero />
       <PainPoint />
       <BrandPillars />
@@ -18,6 +19,6 @@ export default function HomePage() {
       <Process />
       <Metrics />
       <FinalCTA />
-    </>
+    </PageTransition>
   );
 }

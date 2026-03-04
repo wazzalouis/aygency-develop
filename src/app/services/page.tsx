@@ -6,6 +6,7 @@ import SectionContainer from "@/components/ui/SectionContainer";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import Button from "@/components/ui/Button";
+import PageTransition from "@/components/ui/PageTransition";
 import { services } from "@/lib/data";
 
 const iconMap = {
@@ -17,7 +18,7 @@ const iconMap = {
 
 export default function ServicesPage() {
   return (
-    <>
+    <PageTransition>
       {/* Hero */}
       <section className="bg-secondary pt-32 pb-20">
         <SectionContainer>
@@ -121,6 +122,6 @@ export default function ServicesPage() {
           </div>
         </SectionContainer>
       </section>
-    </>
+    </PageTransition>
   );
 }

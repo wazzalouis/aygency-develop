@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { gsap } from "@/lib/gsap";
 import SectionContainer from "@/components/ui/SectionContainer";
 import Button from "@/components/ui/Button";
 
@@ -10,6 +11,9 @@ const smoothEase = [0.16, 1, 0.3, 1] as const;
 
 export default function Hero() {
   const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(true);
+  const heroRef = useRef<HTMLElement>(null);
+  const ringsRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrollIndicatorVisible(window.scrollY < 100);
@@ -17,12 +21,54 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Parallax on orbital rings
+  useEffect(() => {
+    if (!ringsRef.current || !heroRef.current) return;
+    const tl = gsap.to(ringsRef.current, {
+      y: "-20%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  }, []);
+
+  // Content fade-out on scroll
+  useEffect(() => {
+    if (!contentRef.current || !heroRef.current) return;
+    const tl = gsap.to(contentRef.current, {
+      opacity: 0,
+      y: -50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "60% top",
+        scrub: true,
+      },
+    });
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  }, []);
+
   const handleScrollDown = () => {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   };
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-primary">
+    <section
+      ref={heroRef}
+      className="relative min-h-[100svh] overflow-hidden bg-primary"
+    >
       {/* Background visual layer */}
       <div className="absolute inset-0">
         {/* Warm radial gradient */}
@@ -42,11 +88,13 @@ export default function Hero() {
             backgroundSize: "256px 256px",
           }}
         />
-        {/* TODO: Replace with cinematic AI/tech video or 3D rendered visual (MP4, H.264, 1080p, <8MB, 15-20s loop) */}
       </div>
 
       {/* Abstract orbital element — right side, desktop only */}
-      <div className="absolute -right-[5%] bottom-[10%] w-[500px] h-[500px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px] opacity-0 md:opacity-60 pointer-events-none">
+      <div
+        ref={ringsRef}
+        className="absolute -right-[5%] bottom-[10%] w-[500px] h-[500px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px] opacity-0 md:opacity-60 pointer-events-none"
+      >
         {/* Outer ring — slow rotation */}
         <div className="absolute inset-0 rounded-full border border-border/30 animate-[spin_60s_linear_infinite]">
           {/* Middle ring — offset */}
@@ -64,7 +112,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10">
+      <div ref={contentRef} className="relative z-10">
         <SectionContainer className="pt-40 md:pt-48 pb-32 md:pb-40">
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-24 items-end">
             {/* Left column — main content */}
