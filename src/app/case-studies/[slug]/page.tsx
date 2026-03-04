@@ -1,20 +1,37 @@
-import SectionContainer from "@/components/ui/SectionContainer";
-import SectionHeading from "@/components/ui/SectionHeading";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { caseStudies } from "@/lib/data";
+import CaseStudyDetailClient from "./CaseStudyDetailClient";
 
-export default function CaseStudyDetailPage({
+export function generateStaticParams() {
+  return caseStudies.map((cs) => ({ slug: cs.slug }));
+}
+
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const study = caseStudies.find((cs) => cs.slug === slug);
+  if (!study) return {};
+  return {
+    title: `${study.title} — Aygency Case Study`,
+    description: study.challenge,
+  };
+}
+
+export default async function CaseStudyDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
 }) {
-  return (
-    <section className="section-padding">
-      <SectionContainer>
-        <SectionHeading
-          eyebrow="Case Study"
-          heading={params.slug.replace(/-/g, " ")}
-          description="Case study details coming soon."
-        />
-      </SectionContainer>
-    </section>
-  );
+  const { slug } = await params;
+  const studyIndex = caseStudies.findIndex((cs) => cs.slug === slug);
+  if (studyIndex === -1) notFound();
+
+  const study = caseStudies[studyIndex];
+  const nextStudy = caseStudies[(studyIndex + 1) % caseStudies.length];
+
+  return <CaseStudyDetailClient study={study} nextStudy={nextStudy} />;
 }
