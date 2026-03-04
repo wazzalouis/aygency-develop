@@ -5,49 +5,152 @@ export const services: Service[] = [
     slug: "agent-design",
     title: "AI Agent Design & Deployment",
     shortTitle: "Agent Design",
-    description: "Custom-built AI agents tailored to your workflows, data, and business logic.",
-    longDescription: "",
+    description:
+      "Custom-built AI agents tailored to your workflows, data, and business logic.",
+    longDescription:
+      "We design, build, and deploy custom AI agents that integrate directly into your business workflows. Not chatbots. Not demos. Production-grade autonomous systems that handle real decisions with real data.",
     icon: "agent",
-    useCases: [],
-    problem: "",
-    approach: [],
-    ctaHeading: "Ready to build your AI agent?",
+    useCases: [
+      "Custom chatbots and virtual assistants trained on your business data",
+      "Multi-agent workflows that coordinate across departments",
+      "Autonomous agents that monitor, decide, and act without human intervention",
+      "Integration with existing tools — Slack, CRM, ERP, email, databases",
+    ],
+    problem:
+      "Your business is drowning in manual processes, tribal knowledge, and siloed data. You\u2019ve seen what AI can do but every \u2018solution\u2019 you\u2019ve been offered is either a generic chatbot or a 6-month consulting engagement that ends with a report, not a product.",
+    approach: [
+      {
+        title: "Discovery & Mapping",
+        desc: "We map your workflows, data sources, and decision points to identify exactly where agents add value.",
+      },
+      {
+        title: "Agent Architecture",
+        desc: "We design the system \u2014 which agents, what they do, how they communicate, what data they need.",
+      },
+      {
+        title: "Build & Integrate",
+        desc: "We build the agents using the best models for the task and integrate them with your existing tools.",
+      },
+      {
+        title: "Deploy & Monitor",
+        desc: "We deploy into your environment with monitoring, alerting, and continuous improvement built in.",
+      },
+    ],
+    relatedCaseStudy: "stockpilot",
+    ctaHeading: "Ready to deploy your first AI agent?",
   },
   {
     slug: "ai-marketing",
     title: "AI-Powered Marketing",
     shortTitle: "AI Marketing",
-    description: "Intelligent ad management, content generation, and pipeline automation.",
-    longDescription: "",
+    description:
+      "Intelligent ad management, content generation, and pipeline automation.",
+    longDescription:
+      "We replace the traditional agency model with AI-native marketing systems. Automated ad creation, intelligent targeting, real-time optimisation, and reporting \u2014 all running autonomously.",
     icon: "marketing",
-    useCases: [],
-    problem: "",
-    approach: [],
-    ctaHeading: "Ready to supercharge your marketing?",
+    useCases: [
+      "AI-generated ad creatives and copy tailored to your brand voice",
+      "Automated audience targeting and budget optimisation across platforms",
+      "Content calendar management with AI-driven scheduling",
+      "Real-time performance dashboards with automated reporting",
+    ],
+    problem:
+      "Traditional marketing agencies burn budget on headcount \u2014 strategists, copywriters, designers, media buyers \u2014 and still can\u2019t personalise at scale. Campaign turnaround takes weeks. Reporting is manual. Optimisation is reactive, not predictive.",
+    approach: [
+      {
+        title: "Audit & Strategy",
+        desc: "We analyse your current marketing stack, spend, and performance to identify the highest-impact automation opportunities.",
+      },
+      {
+        title: "Agent Design",
+        desc: "We architect the AI agents \u2014 creative generation, targeting, buying, reporting \u2014 each specialised for its role.",
+      },
+      {
+        title: "Platform Integration",
+        desc: "We connect to your ad platforms (Meta, Google, TikTok, LinkedIn) and existing marketing tools.",
+      },
+      {
+        title: "Launch & Optimise",
+        desc: "We launch the system, monitor performance, and continuously refine the agents based on real results.",
+      },
+    ],
+    relatedCaseStudy: "smma-pipeline",
+    ctaHeading: "Ready to automate your marketing?",
   },
   {
     slug: "automation",
     title: "Process Automation",
     shortTitle: "Automation",
-    description: "From lead conversion to inventory management — AI that runs your operations.",
-    longDescription: "",
+    description:
+      "From lead conversion to inventory management \u2014 AI that runs your operations.",
+    longDescription:
+      "We automate operational processes that are bleeding time and money \u2014 inventory, lead routing, energy management, document handling. AI agents that monitor, decide, and act in real time.",
     icon: "automation",
-    useCases: [],
-    problem: "",
-    approach: [],
-    ctaHeading: "Ready to automate your workflows?",
+    useCases: [
+      "Lead scoring and conversion automation for sales teams",
+      "Inventory and supply chain optimisation for retail and hospitality",
+      "Energy monitoring and cost reduction for property portfolios",
+      "Document processing and data extraction from unstructured sources",
+    ],
+    problem:
+      "Operational processes \u2014 inventory, lead routing, energy management, document handling \u2014 are still run on spreadsheets, gut feel, and manual checks. Errors compound. Opportunities slip. The data exists but nobody\u2019s reading it in real time.",
+    approach: [
+      {
+        title: "Process Mapping",
+        desc: "We document every step of the process \u2014 inputs, decisions, outputs, exceptions \u2014 to understand exactly what to automate.",
+      },
+      {
+        title: "Data Pipeline",
+        desc: "We build the data connections \u2014 APIs, webhooks, scrapers \u2014 to feed real-time information to the agents.",
+      },
+      {
+        title: "Agent Deployment",
+        desc: "We deploy agents that monitor data streams, make decisions based on your rules, and take action automatically.",
+      },
+      {
+        title: "Continuous Improvement",
+        desc: "We track performance, identify edge cases, and refine the agents to handle increasingly complex scenarios.",
+      },
+    ],
+    relatedCaseStudy: "energy-management",
+    ctaHeading: "Ready to automate your operations?",
   },
   {
     slug: "consulting",
     title: "Strategic AI Consulting",
     shortTitle: "AI Consulting",
-    description: "We audit your business and identify exactly where AI delivers the highest ROI.",
-    longDescription: "",
+    description:
+      "We audit your business and identify exactly where AI delivers the highest ROI.",
+    longDescription:
+      "We audit your business and tell you exactly where AI will \u2014 and won\u2019t \u2014 make a difference. No vendor pitches. No tool recommendations. Just honest analysis of your highest-ROI opportunities.",
     icon: "consulting",
-    useCases: [],
-    problem: "",
-    approach: [],
-    ctaHeading: "Ready for expert AI guidance?",
+    useCases: [
+      "Full AI readiness audit \u2014 where are the opportunities in your business?",
+      "Build vs buy analysis for AI tools and platforms",
+      "AI strategy roadmap aligned to your business goals and budget",
+      "Team training and upskilling for AI adoption",
+    ],
+    problem:
+      "Most businesses know AI matters but don\u2019t know where to start. They\u2019ve sat through vendor pitches for tools that solve problems they don\u2019t have. They need someone who\u2019ll look at their actual workflows and tell them where AI will \u2014 and won\u2019t \u2014 make a difference.",
+    approach: [
+      {
+        title: "Business Immersion",
+        desc: "We spend time with your teams understanding workflows, pain points, data, and decision-making processes.",
+      },
+      {
+        title: "Opportunity Mapping",
+        desc: "We identify every potential AI application, score them by impact and feasibility, and rank them.",
+      },
+      {
+        title: "Strategy & Roadmap",
+        desc: "We deliver a clear roadmap \u2014 what to build first, what to wait on, what to skip \u2014 with timelines and budgets.",
+      },
+      {
+        title: "Execution Support",
+        desc: "If you want us to build it, we build it. If you want to build internally, we help you hire and onboard.",
+      },
+    ],
+    ctaHeading: "Ready to find your AI opportunity?",
   },
 ];
 export const caseStudies: CaseStudy[] = [

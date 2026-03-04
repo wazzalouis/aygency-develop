@@ -1,20 +1,38 @@
-import SectionContainer from "@/components/ui/SectionContainer";
-import SectionHeading from "@/components/ui/SectionHeading";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { services, caseStudies } from "@/lib/data";
+import ServiceDetailClient from "./ServiceDetailClient";
 
-export default function ServiceDetailPage({
+export function generateStaticParams() {
+  return services.map((s) => ({ slug: s.slug }));
+}
+
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const service = services.find((s) => s.slug === slug);
+  if (!service) return {};
+  return {
+    title: `${service.title} — Aygency`,
+    description: service.longDescription,
+  };
+}
+
+export default async function ServiceDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
 }) {
-  return (
-    <section className="section-padding">
-      <SectionContainer>
-        <SectionHeading
-          eyebrow="Service"
-          heading={params.slug.replace(/-/g, " ")}
-          description="Service details coming soon."
-        />
-      </SectionContainer>
-    </section>
-  );
+  const { slug } = await params;
+  const service = services.find((s) => s.slug === slug);
+  if (!service) notFound();
+
+  const relatedStudy = service.relatedCaseStudy
+    ? caseStudies.find((cs) => cs.slug === service.relatedCaseStudy)
+    : undefined;
+
+  return <ServiceDetailClient service={service} relatedStudy={relatedStudy} />;
 }
