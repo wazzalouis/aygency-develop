@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import SectionContainer from "@/components/ui/SectionContainer";
 import Button from "@/components/ui/Button";
 
@@ -23,6 +23,7 @@ export default function Hero() {
 
   // Parallax on orbital rings
   useEffect(() => {
+    if (prefersReducedMotion) return;
     if (!ringsRef.current || !heroRef.current) return;
     const tl = gsap.to(ringsRef.current, {
       y: "-20%",
@@ -42,6 +43,7 @@ export default function Hero() {
 
   // Content fade-out on scroll
   useEffect(() => {
+    if (prefersReducedMotion) return;
     if (!contentRef.current || !heroRef.current) return;
     const tl = gsap.to(contentRef.current, {
       opacity: 0,
@@ -76,7 +78,7 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(123,167,188,0.08) 0%, transparent 70%)",
+              "radial-gradient(ellipse at center, rgba(69,121,144,0.08) 0%, transparent 70%)",
           }}
         />
         {/* Subtle grain texture */}
@@ -104,7 +106,7 @@ export default function Hero() {
               className="absolute inset-[15%] rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(123,167,188,0.05) 0%, transparent 70%)",
+                  "radial-gradient(circle, rgba(69,121,144,0.05) 0%, transparent 70%)",
               }}
             />
           </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans, Inter, Playfair_Display } from "next/font/google";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
+import MotionProvider from "@/components/ui/MotionProvider";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -27,6 +28,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aygency.ai"),
   title: "Aygency — AI Agents That Solve Real Business Problems",
   description:
     "Aygency designs, builds, and deploys custom AI agent systems for businesses. Weeks, not months. Measurable ROI from day one.",
@@ -44,6 +46,9 @@ export const metadata: Metadata = {
     description:
       "Aygency designs, builds, and deploys custom AI agent systems for businesses. Weeks, not months. Measurable ROI from day one.",
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -57,9 +62,35 @@ export default function RootLayout({
       className={`${instrumentSans.variable} ${inter.variable} ${playfairDisplay.variable}`}
     >
       <body className="font-body antialiased">
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "Aygency",
+              url: "https://aygency.ai",
+              description:
+                "Aygency designs, builds, and deploys custom AI agent systems for businesses.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "London",
+                addressCountry: "GB",
+              },
+            }),
+          }}
+        />
+        <a
+          href="#main-content"
+          className="skip-to-content"
+        >
+          Skip to content
+        </a>
+        <MotionProvider>
+          <Nav />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

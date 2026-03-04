@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import SectionContainer from "@/components/ui/SectionContainer";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
@@ -13,6 +13,10 @@ export default function Process() {
   const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (prefersReducedMotion) {
+      if (lineRef.current) lineRef.current.style.transform = "scaleY(1)";
+      return;
+    }
     if (!timelineRef.current || !lineRef.current) return;
     const trigger = ScrollTrigger.create({
       trigger: timelineRef.current,

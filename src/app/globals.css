@@ -10,10 +10,10 @@
   --text-primary: #1A1A1A;
   --text-secondary: #4A4A4A;
   --text-tertiary: #8A8A84;
-  --accent: #7BA7BC;
-  --accent-hover: #5E8FA6;
-  --accent-light: #E8F1F5;
-  --accent-subtle: #F0F6F9;
+  --accent: #457990;
+  --accent-hover: #3A6B80;
+  --accent-light: #E0EEF3;
+  --accent-subtle: #EDF5F8;
   --border: #E0DDD8;
   --border-light: #ECEAE6;
 }
@@ -59,6 +59,19 @@ body {
   }
 }
 
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 80%;
+  }
+  100% {
+    width: 80%;
+    opacity: 0;
+  }
+}
+
 @layer utilities {
   .section-padding {
     @apply py-20 md:py-24 lg:py-[140px];
@@ -86,13 +99,45 @@ body {
   }
 }
 
+/* Skip to content */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: white;
+  font-weight: 500;
+  border-radius: 0 0 0.5rem 0;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  left: 0;
+}
+
+/* Focus states */
 a:focus-visible,
 button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(123, 167, 188, 0.3);
+  box-shadow: 0 0 0 2px rgba(69, 121, 144, 0.3);
   border-radius: 4px;
 }
 
+/* Icon hover animation */
 .group:hover .icon-animate {
   animation: iconBounce 0.3s ease;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

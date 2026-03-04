@@ -92,6 +92,7 @@ export default function ContactClient() {
                     src="https://cal.com"
                     className="w-full h-full min-h-[500px] border-0"
                     title="Schedule a discovery call"
+                    loading="lazy"
                     onLoad={() => setCalLoaded(true)}
                   />
                   {/* Skeleton loading state */}

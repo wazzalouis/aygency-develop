@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 
 export function CountUp({
   target,
@@ -14,10 +14,15 @@ export function CountUp({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const shouldReduceMotion = useReducedMotion();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
+    if (shouldReduceMotion) {
+      setCount(target);
+      return;
+    }
     let startTime: number;
     let rafId: number;
     const animate = (timestamp: number) => {
@@ -34,7 +39,7 @@ export function CountUp({
     };
     rafId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafId);
-  }, [isInView, target, duration]);
+  }, [isInView, target, duration, shouldReduceMotion]);
 
   return (
     <span ref={ref}>
